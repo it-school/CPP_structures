@@ -168,7 +168,7 @@ int main()
 
 	p11.input();
 	cout << "Distance to (0, 0): " << p11.getZeroDistance() << endl;
-	
+
 
 	// point3D
 	point3D* p1 = new point3D;
@@ -189,7 +189,7 @@ int main()
 
 	// Array of point2D
 	const int N = 10;
-	point2D points [N];
+	point2D points[N];
 	for (int i = 0; i < N; i++)
 	{
 		points[i].input(2 + rand() % 12, rand() % 20);
