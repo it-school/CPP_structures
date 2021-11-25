@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cmath>
+#include "CPP_structures.h"
 using namespace std;
 
 struct Triangle
@@ -67,10 +68,24 @@ bool Triangle::isTriangle()
 }
 
 
-struct point2D
+struct Point2D
 {
 	int x;
 	int y;
+	double zeroDistance;
+
+	Point2D(int x, int y)
+	{
+		this->x = x;
+		this->y = y;
+		zeroDistance = getZeroDistance();
+	}
+
+	Point2D()
+	{
+		this->x = 0;
+		this->y = 0;
+	}
 
 	void input()
 	{
@@ -84,11 +99,12 @@ struct point2D
 	{
 		x = a;
 		y = b;
+		zeroDistance = getZeroDistance();
 	}
 
 	void showInfo(const int n)
 	{
-		std::cout << "\nPoint" << (n + 1) << " (" << x << ", " << y << ")\n";
+		std::cout << "\nPoint" << n << " (" << x << ", " << y << ")\n";
 	}
 
 	void showInfo()
@@ -98,16 +114,97 @@ struct point2D
 
 	double getZeroDistance()
 	{
-		return sqrt(x * x + y * y);
+		// return getDistance();
+		return getDistance(0, 0);
+	}
+
+	double getDistance(int x2 = 0, int y2 = 0)
+	{
+		return sqrt(pow((x - x2), 2) + pow((y - y2), 2));
+	}
+
+	double getDistance(Point2D point)
+	{
+		return sqrt(pow((x - point.x), 2) + pow((y - point.y), 2));
 	}
 };
 
+struct Circle
+{
+	Point2D center;
+	int radius;
 
-struct point3D
+	Circle(int x, int y, int r);
+	void showInfo();
+	double getPerimeter();
+	double getSquare();
+	bool contains(Point2D point);
+	bool contains(int x, int y);
+};
+
+Circle::Circle(int x, int y, int r)
+{
+	center.x = x;
+	center.y = y;
+	radius = r;
+}
+
+void Circle::showInfo()
+{
+	cout << "\nCircle: ";
+	cout << endl << "center: " << "(" << center.x << ", " << center.y << ")";
+	cout << endl << "radius = " << radius;
+	cout << endl << "perimeter = " << getPerimeter() << endl;
+}
+
+double Circle::getPerimeter()
+{
+	return 2 * 3.1415 * radius;
+}
+
+double Circle::getSquare()
+{
+	return 3.1415 * radius * radius;
+}
+
+bool Circle::contains(Point2D point)
+{
+	double distance = center.getDistance(point);
+	if (distance <= radius)
+		return true;
+	else
+		return false;
+}
+
+
+bool Circle::contains(int x, int y)
+{
+	double distance = center.getDistance(x, y);
+	if (distance <= radius)
+		return true;
+	else
+		return false;
+}
+
+struct Point3D
 {
 	int x;
 	int y;
 	int z;
+
+	Point3D()
+	{
+		x = 0;
+		y = 0;
+		z = 0;
+	}
+
+	Point3D(int a, int b, int c)
+	{
+		x = a;
+		y = b;
+		z = c;
+	}
 
 	void input()
 	{
@@ -119,7 +216,7 @@ struct point3D
 		cin >> z;
 	}
 
-	void input(int a, int b, int c)
+	void set(int a, int b, int c)
 	{
 		x = a;
 		y = b;
@@ -141,15 +238,24 @@ struct point3D
 		return calculateDistance();
 	}
 
-	double calculateDistance(const point3D* point)
+	double calculateDistance(const Point3D* point)
 	{
 		return calculateDistance(point->x, point->y, point->z);
 	}
 };
 
 
+void inputPointXY(Point2D& point1)
+{
+	cout << "Input x:" << endl;
+	cin >> point1.x;
+	cout << "Input y:" << endl;
+	cin >> point1.y;
+}
+
 int main()
 {
+	/*
 	// point2D
 	point2D p11, p12, p13;
 	p11.input(1, 7);
@@ -229,6 +335,47 @@ int main()
 	cout << endl << (triangle1.equals(triangle2) ? "equal" : "not equal");
 
 	cout << endl << (triangle1.getArea() >= triangle1.getArea(3, 6, 7) ? "equal" : "not equal");
+	*/
+
+	Point2D point1, point2, point3;
+	//inputPointXY(point1);
+	//point1.input();
+	point1.input(2, 6);
+	point2.input(2, 3);
+	point3.input(0, 0);
+
+	point1.showInfo(1);
+	point2.showInfo(2);
+	point3.showInfo(3);
+
+	cout << endl << point1.getZeroDistance();
+	cout << endl << point2.getZeroDistance();
+	cout << endl << point3.getZeroDistance();
+
+	cout << endl << point1.getDistance(2, 3);
+	cout << endl << point1.getDistance(point2);
+
+	Circle circle1(3, 7, 4);
+	circle1.showInfo();
+
+	cout << endl << (circle1.contains(Point2D(-5, -2)) == true ? "Circle contains point (-5, -2)" : "Point (-5, -2) is out of circle");
+	cout << endl << (circle1.contains(5, 9) == true ? "Circle contains point (5,9)" : "Point (5,9) is out of circle");
+	cout << endl << circle1.center.getDistance(5, 9);
+
+	Point3D p1(1, 2, 6), p2(2, 6, -5);
+	p1.showInfo();
+	p2.showInfo();
+
+	cout << endl << p1.getZeroDistance();
+	cout << endl << p2.getZeroDistance();
+	cout << endl << p1.calculateDistance(&p2);
+
+	cout << endl << sizeof(Point2D);
+	cout << endl << sizeof(Point3D);
+
+	cout << endl << sizeof(point1);
+	cout << endl << sizeof(p1);
+
 
 	return 0;
 }
