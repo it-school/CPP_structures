@@ -21,6 +21,7 @@ struct Triangle
 	float getBigger(Triangle triangle);
 	bool equals(Triangle triangle);
 	bool isTriangle();
+	bool isTriangle(float a, float b, float c);
 };
 
 void Triangle::init(int number, float a, float b, float c)
@@ -38,7 +39,14 @@ void Triangle::print()
 
 float Triangle::getPerimeter()
 {
-	return sideA + sideB + sideC;
+	if (isTriangle(sideA, sideB, sideC))
+	{
+		return sideA + sideB + sideC;
+	}
+	else
+	{
+		return -1;
+	}
 }
 
 float Triangle::getArea()
@@ -48,8 +56,15 @@ float Triangle::getArea()
 
 inline float Triangle::getArea(float a, float b, float c)
 {
-	float p = (a + b + c) / 2;
-	return sqrt(p * (p - a) * (p - b) * (p - c));
+	if (isTriangle(a, b, c))
+	{
+		float p = (a + b + c) / 2;
+		return sqrt(p * (p - a) * (p - b) * (p - c));
+	}
+	else
+	{
+		return -1;
+	}
 }
 
 float Triangle::getBigger(Triangle triangle)
@@ -64,7 +79,12 @@ bool Triangle::equals(Triangle triangle)
 
 bool Triangle::isTriangle()
 {
-	return ((sideA + sideB > sideC) && (sideA + sideC > sideB) && (sideB + sideC > sideA)) ? true : false;
+	return isTriangle(sideA, sideB, sideC);
+}
+
+bool Triangle::isTriangle(float a, float b, float c)
+{
+	return ((a + b > c) && (a + c > b) && (b + c > a)) ? true : false;
 }
 
 
@@ -255,6 +275,15 @@ void inputPointXY(Point2D& point1)
 
 int main()
 {
+	Triangle triangle1;
+	triangle1.init(1, 10, 20, 15);
+	triangle1.print();
+
+
+
+
+
+	return 0;
 	/*
 	// point2D
 	point2D p11, p12, p13;
