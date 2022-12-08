@@ -275,18 +275,8 @@ void inputPointXY(Point2D& point1)
 
 int main()
 {
-	Triangle triangle1;
-	triangle1.init(1, 10, 20, 15);
-	triangle1.print();
-
-
-
-
-
-	return 0;
-	/*
 	// point2D
-	point2D p11, p12, p13;
+	Point2D p11, p12, p13;
 	p11.input(1, 7);
 	p12.input(2, 6);
 	p13.input(3, 5);
@@ -306,15 +296,15 @@ int main()
 
 
 	// point3D
-	point3D* p1 = new point3D;
+	Point3D* p1 = new Point3D;
 	p1->input();
 	p1->showInfo();
 	cout << "Distance to (0, 0, 0): " << p1->getZeroDistance() << endl;
 
 
-	point3D* p2 = new point3D;
+	Point3D* p2 = new Point3D;
 	const int x = 1, y = 4, z = 8; // x - first test coordinate
-	p2->input(x, y, z);
+	p2->input();
 	p2->showInfo();
 	cout << "Zero distance: " << p2->getZeroDistance();
 
@@ -324,7 +314,7 @@ int main()
 
 	// Array of point2D
 	const int N = 10;
-	point2D points[N];
+	Point2D points[N];
 	for (int i = 0; i < N; i++)
 	{
 		points[i].input(2 + rand() % 12, rand() % 20);
@@ -364,7 +354,7 @@ int main()
 	cout << endl << (triangle1.equals(triangle2) ? "equal" : "not equal");
 
 	cout << endl << (triangle1.getArea() >= triangle1.getArea(3, 6, 7) ? "equal" : "not equal");
-	*/
+	
 
 	Point2D point1, point2, point3;
 	//inputPointXY(point1);
@@ -391,13 +381,13 @@ int main()
 	cout << endl << (circle1.contains(5, 9) == true ? "Circle contains point (5,9)" : "Point (5,9) is out of circle");
 	cout << endl << circle1.center.getDistance(5, 9);
 
-	Point3D p1(1, 2, 6), p2(2, 6, -5);
-	p1.showInfo();
-	p2.showInfo();
+	Point3D p3d_1(1, 2, 6), p3d_2(2, 6, -5);
+	p3d_1.showInfo();
+	p3d_2.showInfo();
 
-	cout << endl << p1.getZeroDistance();
-	cout << endl << p2.getZeroDistance();
-	cout << endl << p1.calculateDistance(&p2);
+	cout << endl << p3d_1.getZeroDistance();
+	cout << endl << p3d_2.getZeroDistance();
+	cout << endl << p3d_1.calculateDistance(p2);
 
 	cout << endl << sizeof(Point2D);
 	cout << endl << sizeof(Point3D);
