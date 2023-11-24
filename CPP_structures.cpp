@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <cmath>
-#include "CPP_structures.h"
+#include <iomanip>
 using namespace std;
 
 struct Triangle
@@ -135,8 +135,8 @@ struct Point2D
 
 	double getZeroDistance()
 	{
-		// return getDistance();
-		return getDistance(0, 0);
+		return getDistance();
+		// return getDistance(0, 0);
 	}
 
 	double getDistance(int x2 = 0, int y2 = 0)
@@ -146,7 +146,8 @@ struct Point2D
 
 	double getDistance(Point2D point)
 	{
-		return sqrt(pow((x - point.x), 2) + pow((y - point.y), 2));
+		return getDistance(point.x, point.y);
+		// return sqrt(pow((x - point.x), 2) + pow((y - point.y), 2));
 	}
 };
 
@@ -278,8 +279,8 @@ int main()
 {
 	// point2D
 	Point2D p11, p12, p13;
-	p11.input(1, 7);
-	p12.input(2, 6);
+	p11.input(0, 4);
+	p12.input(3, 0);
 	p13.input(3, 5);
 
 	p11.showInfo();
@@ -291,9 +292,13 @@ int main()
 	p13.showInfo();
 	cout << "Distance to (0, 0): " << p13.getZeroDistance() << endl;
 
+	cout << "Distance from p11 to p12: " << p11.getDistance(p12) << endl;
 
 	p11.input();
 	cout << "Distance to (0, 0): " << p11.getZeroDistance() << endl;
+
+
+	cout << "Distance from p11 to (3,6): " << p11.getDistance(3, 6) << endl;
 
 
 	// point3D
@@ -386,15 +391,17 @@ int main()
 	p3d_1.showInfo();
 	p3d_2.showInfo();
 
-	cout << endl << p3d_1.getZeroDistance();
-	cout << endl << p3d_2.getZeroDistance();
-	cout << endl << p3d_1.calculateDistance(p2);
+	cout << endl << "p3d_1 distance from (0, 0, 0) = " << p3d_1.getZeroDistance();
+	cout << endl << "p3d_2 distance from (0, 0, 0) = " << p3d_2.getZeroDistance();
+	cout << endl << "p3d_1 distance from p3d_2 = " << p3d_1.calculateDistance(p2);
 
-	cout << endl << sizeof(Point2D);
-	cout << endl << sizeof(Point3D);
+	cout << endl << endl << "Sizes of different structs:" << endl;
+	cout << endl << "Size of struct Point2D: " << setw(10) << sizeof(Point2D) << " bytes";
+	cout << endl << "Size of struct Point3D: " << setw(10) << sizeof(Point3D) << " bytes";
 
-	cout << endl << sizeof(point1);
-	cout << endl << sizeof(p1);
+	cout << endl << "Size of 'point1' variable of struct Point2D: " << setw(6) << sizeof(point1) << " bytes";
+	cout << endl << "Size of 'p1' variable of struct Point3D: " << setw(10) << sizeof(p1) << " bytes";
+	cout << endl;
 
 	return 0;
 }
