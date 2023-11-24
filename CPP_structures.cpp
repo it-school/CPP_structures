@@ -105,6 +105,7 @@ struct Point2D
 	{
 		this->x = 0;
 		this->y = 0;
+		this->zeroDistance = 0;
 	}
 
 	void input()
@@ -354,7 +355,7 @@ int main()
 	cout << endl << (triangle1.equals(triangle2) ? "equal" : "not equal");
 
 	cout << endl << (triangle1.getArea() >= triangle1.getArea(3, 6, 7) ? "equal" : "not equal");
-	
+
 
 	Point2D point1, point2, point3;
 	//inputPointXY(point1);
@@ -394,7 +395,6 @@ int main()
 
 	cout << endl << sizeof(point1);
 	cout << endl << sizeof(p1);
-
 
 	return 0;
 }
